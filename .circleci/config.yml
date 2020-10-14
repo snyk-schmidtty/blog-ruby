@@ -20,7 +20,6 @@ jobs:
       - image: circleci/buildpack-deps:stretch 
     environment:
       IMAGE_NAME: purpledobie/blog
-      TAG: 1.$CIRCLE_BUILD_NUM
     steps:
       - checkout
       - setup_remote_docker:
@@ -31,7 +30,7 @@ jobs:
           environment:
             DOCKER_BUILDKIT: 1
       - snyk/scan:
-          docker-image-name: $IMAGE_NAME:$TAG
+          docker-image-name: $IMAGE_NAME:1.$CIRCLE_BUILD_NUM
           monitor-on-build: false
           target-file: Dockerfile
           fail-on-issues: false
