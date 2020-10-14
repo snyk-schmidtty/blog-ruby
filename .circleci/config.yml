@@ -31,7 +31,7 @@ jobs:
             DOCKER_BUILDKIT: 1
       - snyk/scan:
           docker-image-name: $IMAGE_NAME
-          monitor-on-build: false
+          monitor-on-build: true
           target-file: Dockerfile
           fail-on-issues: false
           severity-threshold: medium
@@ -39,7 +39,7 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  secure:
     jobs:
 #      - build
       - security
