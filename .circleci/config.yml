@@ -30,7 +30,7 @@ jobs:
           environment:
             DOCKER_BUILDKIT: 1
       - snyk/scan:
-          docker-image-name: $IMAGE_NAME:1.$CIRCLE_BUILD_NUM
+          docker-image-name: $IMAGE_NAME:sc2020
           monitor-on-build: false
           target-file: Dockerfile
           fail-on-issues: false
