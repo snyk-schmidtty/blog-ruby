@@ -19,18 +19,18 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch 
     environment:
-      IMAGE_NAME: purpledobie/blog
+      IMAGE_NAME: purpledobie/blog:sc2020
     steps:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
       - run:
           name: Build image
-          command: docker build --progress plain -t $IMAGE_NAME:$TAG .
+          command: docker build --progress plain -t $IMAGE_NAME .
           environment:
             DOCKER_BUILDKIT: 1
       - snyk/scan:
-          docker-image-name: $IMAGE_NAME:sc2020
+          docker-image-name: $IMAGE_NAME
           monitor-on-build: false
           target-file: Dockerfile
           fail-on-issues: false
