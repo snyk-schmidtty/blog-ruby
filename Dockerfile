@@ -1,18 +1,18 @@
-FROM ruby:2.5-slim
+FROM ruby:2.5.1
 
 RUN apt-get update &&\
-    apt-get install -y git vim build-essential patch ruby-dev zlib1g-dev liblzma-dev libpq-dev libsqlite3-dev &&\
+    apt-get install -y git vim &&\
     rm -rf /var/lib/apt/lists/*
 
-RUN gem update --system 3.1.2 &&\
-    gem install bundler -v '2.1.2'
+RUN gem update --system 3.0.4 &&\
+    gem install bundler -v '2.0.2'
 
 
 WORKDIR /usr/src/app/alpha-blog
 
 COPY . .
 
-ENV BUNDLER_VERSION 2.1.2
+ENV BUNDLER_VERSION 2.0.2
 
 RUN bundle update &&\
     bundle install &&\
