@@ -1,4 +1,4 @@
-FROM ruby:2.7.1-slim-buster
+FROM ruby:2.5-slim
 
 RUN apt-get update &&\
     apt-get install -y git vim build-essential patch ruby-dev zlib1g-dev liblzma-dev libpq-dev libsqlite3-dev &&\
