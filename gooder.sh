@@ -1,3 +1,3 @@
-mv gooder.Dockerfile Dockerfile
-mv gooder.Gemfile Gemfile
-mv gooder.deployment deployment.yaml
+mv ./.orig/gooder.Dockerfile ./Dockerfile
+mv ./.orig/gooder.Gemfile ./Gemfile
+mv ./.orig/gooder.deployment ./deployment.yaml
