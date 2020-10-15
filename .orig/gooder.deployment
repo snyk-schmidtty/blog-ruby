@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blog-service
+  labels:
+    app: blog
+spec:
+  ports:
+  - name: http
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app.kubernetes.io/instance: blog
+    app.kubernetes.io/name: blog
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog
+  annotations:
+    orgs.k8s.snyk.io/v1: 9ff4ae2d-3cac-4259-97de-ea3a395f41ac
+  labels:
+    app: blog
+spec:
+  template:
+    metadata:
+      name: blog-pod
+      labels:
+        app.kubernetes.io/instance: blog
+        app.kubernetes.io/name: blog
+    spec:
+      containers:
+        - name: blog-container
+          image: purpledobie/blog
+          securityContext:
+              allowPrivilegeEscalation: false
+              runAsNonRoot: true
+              runAsUser: 1000
+              runAsGroup: 3000
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "1"
+            requests:
+              memory: "100Mi"
+              cpu: "0.5"
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: blog
+      app.kubernetes.io/name: blog    

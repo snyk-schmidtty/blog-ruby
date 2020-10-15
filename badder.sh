@@ -1,3 +1,3 @@
-cp .orig/orig.Dockerfile
-cp .orig/orig.Gemfile
-cp .orig/orig.deployment
+cp .orig/orig.Dockerfile Dockerfile
+cp .orig/orig.Gemfile Gemfile
+cp .orig/orig.deployment deployment.yaml
