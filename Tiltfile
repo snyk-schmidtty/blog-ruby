@@ -10,6 +10,7 @@
 # and Tilt should handle all the rest for us! When Tilt finishes there should be a new image,
 # and a refreshed deployment
 
+
 docker_build('purpledobie/blog:demo','.')
 k8s_yaml('deployment.yaml')
 
