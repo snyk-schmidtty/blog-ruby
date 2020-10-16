@@ -1,7 +1,7 @@
 FROM ruby:2.5-slim
 
 RUN apt-get update &&\
-    apt-get install -y git vim sqlite3 &&\
+    apt-get install -y sqlite3 &&\
     rm -rf /var/lib/apt/lists/*
 
 RUN gem update --system 3.1.2 &&\

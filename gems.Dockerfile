@@ -14,7 +14,7 @@ WORKDIR $APP_HOME
 
 COPY Gemfile* .
 
-ENV BUNDLER_VERSION 2.0.2
+ENV BUNDLER_VERSION 2.1.2
 ENV RAILS_ENV=development
 
 RUN bundle update &&\

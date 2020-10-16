@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: blog-container
-          image: purpledobie/blog:fixed
+          image: purpledobie/blog:demo
           securityContext:
               allowPrivilegeEscalation: false
               runAsNonRoot: true
