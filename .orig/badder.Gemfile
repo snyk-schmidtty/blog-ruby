@@ -66,11 +66,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production do
-  #since heroku production uses only postgres sql and not sqlite3
-  gem 'pg'
-  gem 'rails_12factor'
-  # Use Redis adapter to run Action Cable in production
-  gem 'redis', '~> 4.0'
-end
+# group :production do
+#   #since heroku production uses only postgres sql and not sqlite3
+#   gem 'pg'
+#   gem 'rails_12factor'
+#   # Use Redis adapter to run Action Cable in production
+#   gem 'redis', '~> 4.0'
+# end
 

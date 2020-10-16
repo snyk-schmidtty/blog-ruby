@@ -34,19 +34,7 @@ spec:
     spec:
       containers:
         - name: blog-container
-          image: purpledobie/blog:fixed
-          securityContext:
-              allowPrivilegeEscalation: false
-              runAsNonRoot: true
-              runAsUser: 1000
-              runAsGroup: 3000
-          resources:
-            limits:
-              memory: "200Mi"
-              cpu: "1"
-            requests:
-              memory: "100Mi"
-              cpu: "0.5"
+          image: purpledobie/blog:demo
   selector:
     matchLabels:
       app.kubernetes.io/instance: blog

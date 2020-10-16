@@ -1,0 +1,11 @@
+/.orig/
+*.sh
+**/.DS_Store
+.git
+.gitignore
+README.md
+/Tiltfile
+/Dockerfile
+/env.*
+/log
+/tmp

@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: blog-container
-          image: purpledobie/blog
+          image: purpledobie/blog:demo
   selector:
     matchLabels:
       app.kubernetes.io/instance: blog

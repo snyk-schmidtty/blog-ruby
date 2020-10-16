@@ -1,3 +1,5 @@
-cp .orig/orig.Dockerfile Dockerfile
-cp .orig/orig.Gemfile Gemfile
-cp .orig/orig.deployment deployment.yaml
+cp .orig/badder.Dockerfile Dockerfile
+cp .orig/badder.Gemfile Gemfile
+cp .orig/badder.deployment deployment.yaml
+cp .orig/badder.Gemfile.lock Gemfile.lock
+cp .orig/badder.gems.Dockerfile gems.Dockerfile
