@@ -26,9 +26,25 @@ When you first clone this repository you _should_ be running the `badder` versio
 The scripts simply copy the requisite files from the .orig directory.
 
 ---
+## Recommended way to run
 
-## Building the containers
-You can build the container images for each demo using Docker. The deployment file is expecting an image `purpledobie/blog:latest` for the `badder` version and `purpledobie/blog:fixed` for the `gooder` version.
+1. Get [Tilt](https://docs.tilt.dev/install.html)
+1. Get Docker Desktop and enable Kubernetes
+1. [Setup Snyk Container](https://support.snyk.io/hc/en-us/articles/360003916138-Kubernetes-integration-overview) to monitor Kube workloads
+1. `tilt up`
+1. Switch between _badder_ and _gooder_ versions of the app:
+   * Run `./badder.sh` to go to the bad version
+   * Run `./gooder.sh` to go to the cleaner version
+   * _tilt_ will take care of building the image and running it in the Kube cluster in Docker Desktop
+
+---
+
+## Running manually
+If you don't want to use Tilt this method will work. But you should use Tilt. :) 
+
+
+### Building the containers
+You can build the container images for each demo using Docker. The Kube deployment file is expecting an image `purpledobie/blog:demo`.
 
 To build the `badder` image:
 ```
@@ -36,7 +52,7 @@ To build the `badder` image:
 ./badder.sh
 
 # build
-docker build -t purpledobie/blog:latest .
+docker build -t purpledobie/blog:demo .
 ```
 To build the `gooder` image:
 ```
@@ -44,5 +60,26 @@ To build the `gooder` image:
 ./gooder.sh
 
 # build
-docker build -t purpledobie/blog:fixed .
+docker build -t purpledobie/blog:demo .
 ```
+Both images look for an intermediate image named `purpledobie/blog:gems-[good | bad]. These images are already built and stored on Docker Hub so you shouldn't need to do anything else...but if you have any issues accessing those images, you can re-build as follows:
+
+```bash
+### badder version
+# make sure you have the badder files:
+./badder.sh
+
+# build
+docker build -t purpledobie/blog:gems-bad . -f .orig/badder.gems.Dockerfile
+
+
+
+### gooder version
+# make sure you have the badder files:
+./gooder.sh
+
+# build
+docker build -t purpledobie/blog:gems-good . -f .orig/gooder.gems.Dockerfile
+```
+
+### 
