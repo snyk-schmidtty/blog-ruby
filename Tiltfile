@@ -26,6 +26,6 @@ k8s_yaml(deploy_file)
 
 k8s_resource(resource_name, port_forwards=3000)
 
-snyk_c('snyk-cnr',image_name,docker_file)
-snyk_i('snyk-iac',deploy_file)
+snyk('snyk-cnr', image_name, 'container', resource_name, "--file="+docker_file)
+snyk('snyk-iac',deploy_file, 'iac', resource_name)
 
