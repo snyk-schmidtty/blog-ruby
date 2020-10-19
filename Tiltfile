@@ -10,65 +10,22 @@
 # and Tilt should handle all the rest for us! When Tilt finishes there should be a new image,
 # and a refreshed deployment
 
-def snyk(name, path, test_type, *dfile, **kwargs):
-    """
-    Args:
-      name: the name of this tilt resource (what you'll see in Tilt's sidebar)
-      path: path to file to test
-            for container: path is the image name and tag
-            for iac: the name of the file to test
-            for oss: path to search. oss uses '--all-projects' by default right now
-      test_type: one of 'container', 'iac', or 'oss'. Determines which test to run.
-      dfile: (optional) the Dockerfile to test with a container test
-    """        
+load('ext://snyk', 'snyk')
 
-    if test_type == 'iac':
-        snyk_test_cmd = " ".join([
-            "snyk",
-            test_type,
-            "test",
-            path
-        ])
-        local_resource(
-          name,
-          deps=[path],
-          cmd= snyk_test_cmd
-        )
-
-    elif test_type == 'container':
-        snyk_test_cmd = " ".join([
-            "snyk",
-            test_type,
-            "test",
-            path,
-            "--file=" + dfile[0]  
-        ])
-        local_resource(
-            name,
-            deps=[path],
-            cmd= snyk_test_cmd  
-        )
-
-    elif test_type == 'oss':
-        snyk_test_cmd = " ".join([
-            "snyk",
-            "test",
-            path,
-            "--all-projects"
-        ])
-        local_resource(
-            name,
-            deps=[path],
-            cmd= snyk_test_cmd  
-        )
+image_name = 'purpledobie/blog:demo' # The name of the image to be built (has to match k8s deploy spec)
+deploy_file = 'deployment.yaml'      # The name of the K8s YAML to apply
+docker_file = 'Dockerfile'       # Dockerfile incl path
+resource_name = 'blog'          # Name Tilt uses for the k8s resource (has to match name from k8s deploy spec)
 
 
+docker_build(image_name,'.')
 
-docker_build('purpledobie/blog:demo','.')
-snyk('snyk-cnr','purpledobie/blog:demo','container','Dockerfile')
-k8s_yaml('deployment.yaml')
-snyk('snyk-iac','deployment.yaml','iac')
 
-k8s_resource('blog', port_forwards=3000)
+k8s_yaml(deploy_file)
 
+
+k8s_resource(resource_name, port_forwards=3000)
+
+snyk_c('snyk-cnr',image_name,docker_file)
+snyk_i('snyk-iac',deploy_file)
 
