@@ -15,17 +15,22 @@ load('ext://snyk', 'snyk')
 image_name = 'purpledobie/blog:demo' # The name of the image to be built (has to match k8s deploy spec)
 deploy_file = 'deployment.yaml'      # The name of the K8s YAML to apply
 docker_file = 'Dockerfile'       # Dockerfile incl path
-resource_name = 'blog'          # Name Tilt uses for the k8s resource (has to match name from k8s deploy spec)
+kube_selector = 'blog'          # Name Tilt uses for the k8s resource (has to match name from k8s deploy spec)
 
 
 docker_build(image_name,'.')
-
-
 k8s_yaml(deploy_file)
+k8s_resource(kube_selector, port_forwards=3000)
 
+# Do our testing - the tests run automatically the first time; subsequent tests are manual (click the refresh button in Tilt UI)
+container_opts = "".join([
+    "--file=",
+    docker_file,
+    " --severity-threshold=medium"
+])
 
-k8s_resource(resource_name, port_forwards=3000)
+iac_opts = " --severity-threshold=medium"
 
-snyk('snyk-cnr', image_name, 'container', resource_name, "--file="+docker_file)
-snyk('snyk-iac',deploy_file, 'iac', resource_name)
+snyk(image_name, 'container', 'snyk-cnr', kube_selector, container_opts)
+snyk(deploy_file, 'iac', 'snyk-iac', '', iac_opts)
 
