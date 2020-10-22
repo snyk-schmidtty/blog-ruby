@@ -1,14 +1,14 @@
-FROM ruby:2.5-slim
+FROM registry.access.redhat.com/ubi8/ruby-25
 
 ARG APP_USER=appuser
 ARG APP_GROUP=appgroup
 ARG APP_DIR=/blog
 
-RUN apt-get update &&\
-    apt-get install -y sqlite3 &&\
-    rm -rf /var/lib/apt/lists/* &&\
-    addgroup --system $APP_GROUP && \
-    adduser --system --uid 101 --ingroup $APP_GROUP $APP_USER && \
+USER root
+RUN yum update --disablerepo=* --enablerepo=ubi-8-appstream --enablerepo=ubi-8-baseos -y && rm -rf /var/cache/yum
+RUN yum install --disablerepo=* --enablerepo=ubi-8-appstream --enablerepo=ubi-8-baseos sqlite -y && rm -rf /var/cache/yum
+RUN groupadd -r $APP_GROUP && \
+    useradd -M -r --uid 101 -g $APP_GROUP $APP_USER && \
     mkdir $APP_DIR && \
     chown $APP_USER:$APP_GROUP $APP_DIR 
 

@@ -19,6 +19,18 @@ spec:
           image: purpledobie/blog:demo
           ports:
           - containerPort: 3000
+          securityContext:
+              allowPrivilegeEscalation: false
+              runAsNonRoot: true
+              runAsUser: 101
+              #runAsGroup: 3000
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "1"
+            requests:
+              memory: "100Mi"
+              cpu: "0.5"
   selector:
     matchLabels:
       app.kubernetes.io/instance: blog
