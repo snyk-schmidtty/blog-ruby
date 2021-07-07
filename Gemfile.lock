@@ -38,7 +38,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ansi (1.5.0)
     arel (8.0.0)
@@ -95,8 +95,8 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     method_source (1.0.0)
-    mini_mime (1.0.2)
-    mini_portile2 (2.4.0)
+    mini_mime (1.1.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.2)
     minitest-reporters (1.4.2)
       ansi
@@ -104,10 +104,12 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     nio4r (2.5.4)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.7)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     public_suffix (4.0.6)
     puma (3.12.6)
+    racc (1.5.2)
     rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -209,7 +211,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.7)
   bootstrap-will_paginate (= 1.0.0)
   byebug
-  capybara (~> 2.13)
+  capybara (~> 2.18, >= 2.18.0)
   coffee-rails (~> 4.2)
   execjs
   jbuilder (~> 2.5)
