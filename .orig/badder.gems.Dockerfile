@@ -4,7 +4,7 @@
 
 # This file is for the 'badder' gems.
 
-FROM ruby:2.5.1
+FROM ruby:2.7.6
 
 RUN gem update --system 3.0.4 &&\
     gem install bundler -v '2.0.2'
