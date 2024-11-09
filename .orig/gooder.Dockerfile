@@ -1,4 +1,4 @@
-FROM ruby:2.5-slim
+FROM ruby:2.7.6-slim
 
 ARG APP_USER=appuser
 ARG APP_GROUP=appgroup
