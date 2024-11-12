@@ -4,7 +4,7 @@
 
 # This file is for the 'gooder' gems.
 
-FROM ruby:2.5
+FROM ruby:2.7.8
 
 RUN gem update --system 3.1.2 &&\
     gem install bundler -v '2.1.2'
